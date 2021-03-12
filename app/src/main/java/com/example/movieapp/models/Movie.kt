@@ -1,10 +1,10 @@
 package com.example.movieapp.models
 
 data class Movie(
-    var title: String,
-    var rating: Float,
-    var genre: List<String>,
-    var creator: List<String>,
-    var actor: List<String>,
-    var description: String
+    var title: String = "Title",
+    var rating: Float = 0.0f,
+    var genre: List<String> = listOf("No Genre"),
+    var creator: List<String> = listOf("No Creator"),
+    var actor: List<String> = listOf("No Actor"),
+    var description: String = "No description"
 )

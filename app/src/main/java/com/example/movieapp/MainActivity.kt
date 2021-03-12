@@ -25,14 +25,20 @@ class MainActivity : AppCompatActivity() {
         floatButton.setOnClickListener { floatButtonClick() }
     }
 
+    /**
+     * Show toast on float button click
+     */
     private fun floatButtonClick() {
         Toast.makeText(this, "Float Button clicked", Toast.LENGTH_LONG).show()
     }
 
+    /**
+     * Initialize the Movie
+     */
     private fun initializeMovie(): Movie {
         return Movie(
             title = "Irgendein Title",
-            rating = 10f,
+            rating = 3.5f,
             genre = listOf("Drama", "Sport"),
             actor = listOf("Sahil", "Thomas", "Baljinder"),
             creator = listOf("Oliver", "Jennifer"),
