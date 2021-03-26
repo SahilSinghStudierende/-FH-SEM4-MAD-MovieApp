@@ -1,33 +1,30 @@
-package com.example.movieapp
+package com.example.movieapp.fragments
 
 import android.os.Bundle
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import com.example.movieapp.R
+import com.example.movieapp.databinding.FragmentMovieOverviewBinding
 import com.example.movieapp.models.Movie
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 
-class MainActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+class MovieOverviewFragment : Fragment() {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val binding = DataBindingUtil.inflate<FragmentMovieOverviewBinding>(inflater, R.layout.fragment_movie_overview, container, false)
 
-        val floatButton: FloatingActionButton = findViewById(R.id.floatButton)
-        floatButton.setOnClickListener { floatButtonClick() }
+        binding.movie = initializeMovie()
+
+        return binding.root
     }
 
-    /**
-     * Show toast on float button click
-     */
-    private fun floatButtonClick() {
-        Toast.makeText(this, "Float Button clicked", Toast.LENGTH_LONG).show()
-    }
-
-    /**
-     * Initialize the Movie
-     */
     private fun initializeMovie(): Movie {
         return Movie(
-            title = "Irgendein Title",
+            title = "Irgendein Titel",
             rating = 3.5f,
             genre = listOf("Drama", "Sport"),
             actor = listOf("Sahil", "Thomas", "Baljinder"),
@@ -39,4 +36,5 @@ class MainActivity : AppCompatActivity() {
                     "Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"
         )
     }
+
 }
