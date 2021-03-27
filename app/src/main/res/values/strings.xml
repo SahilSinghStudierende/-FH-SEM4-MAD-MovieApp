@@ -13,4 +13,9 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="to_detail">To Detail</string>
+    <string name="movie_name">Movie Name</string>
+    <string name="actor">Actor</string>
+    <string name="creator">Creator</string>
+    <string name="see_detail">See Detail</string>
+    <string name="watchlist">Watchlist</string>
 </resources>

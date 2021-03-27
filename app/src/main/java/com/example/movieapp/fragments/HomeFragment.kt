@@ -1,14 +1,13 @@
 package com.example.movieapp.fragments
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.core.os.bundleOf
+import android.view.*
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
+import androidx.navigation.ui.NavigationUI
 import com.example.movieapp.R
+import com.example.movieapp.adapter.MovieOverviewAdapter
 import com.example.movieapp.databinding.FragmentHomeBinding
 import com.example.movieapp.models.Movie
 
@@ -20,27 +19,65 @@ class HomeFragment : Fragment() {
     ): View? {
         val binding = DataBindingUtil.inflate<FragmentHomeBinding>(inflater, R.layout.fragment_home, container, false)
 
-        val bundle = bundleOf("movie" to initializeMovie())
 
-        binding.toDetailButton.setOnClickListener{view: View ->
-            view.findNavController().navigate(R.id.home_to_detail_action, bundle)
-        }
+        // For Recycler View:
+        val adapter = MovieOverviewAdapter()
+        binding.movieList.adapter = adapter
+
+        adapter.data = listOf<Movie>(initializeMovieOne(), initializeMovieOne().copy(title = "Irgendwas 2", actor = listOf("Max Mustermann", "Johnny Depp")))
+
+        // For Menu
+        setHasOptionsMenu(true)
 
         return binding.root
     }
 
-    private fun initializeMovie(): Movie {
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+
+        inflater.inflate(R.menu.navdrawmenu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return NavigationUI.onNavDestinationSelected(item, requireView().findNavController()) || super.onOptionsItemSelected(item)
+    }
+
+    private fun initializeMovieOne(): Movie {
         return Movie(
-            title = "Irgendein Titel",
+            title = "The Queen's Gambit",
             rating = 3.5f,
             genre = listOf("Drama", "Sport"),
             actor = listOf("Sahil", "Thomas", "Baljinder"),
             creator = listOf("Oliver", "Jennifer"),
-            description = "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis " +
-                    "et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui " +
-                    "ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut " +
-                    "labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? " +
-                    "Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"
+            description = "The Queen's Gambit follows the life of an orphan chess prodigy, Elizabeth Harmon, during her quest to become the world's " +
+                    "greatest chess player while struggling with emotional problems and drug and alcohol dependency. The title of the series refers to a " +
+                    "chess opening of the same name. The story begins in the mid-1950s and proceeds into the 1960s. The story begins in Lexington, Kentucky, where a " +
+                    "nine-year-old Beth, having lost her mother in a car crash, is taken to an orphanage where she is taught chess by the building's custodian, Mr. Shaibel. " +
+                    "As was common during the 1950s, the orphanage dispenses daily tranquilizer pills to the girls,[5][6] which turns into an addiction for Beth. She quickly " +
+                    "becomes a strong chess player due to her visualization skills, which are enhanced by the tranquilizers. A few years later, Beth is adopted by Alma Wheatley " +
+                    "and her husband from Lexington. As she adjusts to her new home, Beth enters a chess tournament and wins despite having no prior experience in competitive chess. " +
+                    "She develops friendships with several people, including former Kentucky State Champion Harry Beltik, United States National Champion Benny Watts, and journalist " +
+                    "and fellow player D.L. Townes. As Beth rises to the top of the chess world and reaps the financial benefits of her success, her drug and alcohol dependency becomes worse."
         )
     }
+
+    private fun initializeMovieTwo(): Movie {
+        return Movie(
+            title = "Zack Snyder’s Justice League",
+            rating = 4.5f,
+            genre = listOf("Action", "Science-Fiction", "Fantasy", "Adventure"),
+            actor = listOf("Sahil", "Thomas", "Baljinder"),
+            creator = listOf("Oliver", "Jennifer"),
+            description = "The Queen's Gambit follows the life of an orphan chess prodigy, Elizabeth Harmon, during her quest to become the world's " +
+                    "greatest chess player while struggling with emotional problems and drug and alcohol dependency. The title of the series refers to a " +
+                    "chess opening of the same name. The story begins in the mid-1950s and proceeds into the 1960s. The story begins in Lexington, Kentucky, where a " +
+                    "nine-year-old Beth, having lost her mother in a car crash, is taken to an orphanage where she is taught chess by the building's custodian, Mr. Shaibel. " +
+                    "As was common during the 1950s, the orphanage dispenses daily tranquilizer pills to the girls,[5][6] which turns into an addiction for Beth. She quickly " +
+                    "becomes a strong chess player due to her visualization skills, which are enhanced by the tranquilizers. A few years later, Beth is adopted by Alma Wheatley " +
+                    "and her husband from Lexington. As she adjusts to her new home, Beth enters a chess tournament and wins despite having no prior experience in competitive chess. " +
+                    "She develops friendships with several people, including former Kentucky State Champion Harry Beltik, United States National Champion Benny Watts, and journalist " +
+                    "and fellow player D.L. Townes. As Beth rises to the top of the chess world and reaps the financial benefits of her success, her drug and alcohol dependency becomes worse."
+        )
+    }
+
 }

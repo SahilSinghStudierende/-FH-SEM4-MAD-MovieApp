@@ -21,6 +21,7 @@ class DetailFragment : Fragment() {
 
         binding.movie = arguments?.getSerializable("movie") as Movie?
 
+
         return binding.root
     }
 }
