@@ -8,7 +8,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.example.movieapp.R
 import com.example.movieapp.databinding.FragmentDetailBinding
-import com.example.movieapp.models.Movie
 
 
 class DetailFragment : Fragment() {
@@ -19,7 +18,7 @@ class DetailFragment : Fragment() {
     ): View? {
         val binding = DataBindingUtil.inflate<FragmentDetailBinding>(inflater, R.layout.fragment_detail, container, false)
 
-        binding.movie = arguments?.getSerializable("movie") as Movie?
+        binding.movie = DetailFragmentArgs.fromBundle(requireArguments()).movie
 
 
         return binding.root

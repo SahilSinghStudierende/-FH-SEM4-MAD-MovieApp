@@ -18,7 +18,7 @@
         android:name="com.example.movieapp.fragments.DetailFragment"
         android:label="DetailFragment" >
         <argument
-            android:name="movie_name"
+            android:name="movie"
             app:argType="com.example.movieapp.models.Movie" />
     </fragment>
     <fragment
