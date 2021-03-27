@@ -9,6 +9,7 @@ import com.example.movieapp.R
 import com.example.movieapp.fragments.HomeFragmentDirections
 import com.example.movieapp.models.Movie
 import com.example.movieapp.util.ViewHolder
+import com.example.movieapp.util.setText
 
 class MovieOverviewAdapter : RecyclerView.Adapter<ViewHolder>(){
     var data = listOf<Movie>()
@@ -23,8 +24,9 @@ class MovieOverviewAdapter : RecyclerView.Adapter<ViewHolder>(){
         val item = data[position]
 
         holder.movieTitle.text = item.title
-        holder.actor.text = item.actor.toString()
-        holder.creator.text = item.creator.toString()
+        // Binding Adapter
+        setText(holder.actor, item.actor)
+        setText(holder.creator, item.creator)
 
         holder.seeDetail.setOnClickListener{view: View ->
             view.findNavController().navigate(HomeFragmentDirections.homeToDetailAction(item))

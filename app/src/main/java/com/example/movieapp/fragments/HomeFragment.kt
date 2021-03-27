@@ -17,14 +17,27 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding = DataBindingUtil.inflate<FragmentHomeBinding>(inflater, R.layout.fragment_home, container, false)
+        val binding = DataBindingUtil.inflate<FragmentHomeBinding>(
+            inflater,
+            R.layout.fragment_home,
+            container,
+            false
+        )
 
 
         // For Recycler View:
         val adapter = MovieOverviewAdapter()
         binding.movieList.adapter = adapter
 
-        adapter.data = listOf<Movie>(initializeMovieOne(), initializeMovieOne().copy(title = "Irgendwas 2", actor = listOf("Max Mustermann", "Johnny Depp")))
+        adapter.data = listOf<Movie>(
+            initializeMovieOne(),
+            initializeMovieTwo(),
+            initializeMovieTwo(),
+            initializeMovieTwo(),
+            initializeMovieTwo(),
+            initializeMovieTwo(),
+            initializeMovieTwo()
+        )
 
         // For Menu
         setHasOptionsMenu(true)
@@ -39,7 +52,10 @@ class HomeFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return NavigationUI.onNavDestinationSelected(item, requireView().findNavController()) || super.onOptionsItemSelected(item)
+        return NavigationUI.onNavDestinationSelected(
+            item,
+            requireView().findNavController()
+        ) || super.onOptionsItemSelected(item)
     }
 
     private fun initializeMovieOne(): Movie {
@@ -63,7 +79,7 @@ class HomeFragment : Fragment() {
 
     private fun initializeMovieTwo(): Movie {
         return Movie(
-            title = "Zack Snyder’s Justice League",
+            title = "Snyder’s Justice League",
             rating = 4.5f,
             genre = listOf("Action", "Science-Fiction", "Fantasy", "Adventure"),
             actor = listOf("Sahil", "Thomas", "Baljinder"),

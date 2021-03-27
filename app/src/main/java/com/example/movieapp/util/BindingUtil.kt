@@ -17,18 +17,18 @@ fun setText(textView: TextView, value: List<String>) {
 }
 
 // or this way:
-
-object BindingUtil {
-    @JvmStatic
-    @BindingAdapter("ratingValue")
-    fun setRatingValue(ratingBar: RatingBar, rating: Float) {
-        if (rating in 0.0..5.0)
-            ratingBar.rating = rating
-    }
-
-    @JvmStatic
-    @BindingAdapter("android:text")
-    fun setText(textView: TextView, value: List<String>) {
-        textView.text = value.joinToString(", ")
-    }
-}
+//
+//object BindingUtil {
+//    @JvmStatic
+//    @BindingAdapter("ratingValue")
+//    fun setRatingValue(ratingBar: RatingBar, rating: Float) {
+//        if (rating in 0.0..5.0)
+//            ratingBar.rating = rating
+//    }
+//
+//    @JvmStatic
+//    @BindingAdapter("android:text")
+//    fun setText(textView: TextView, value: List<String>) {
+//        textView.text = value.joinToString(", ")
+//    }
+//}
