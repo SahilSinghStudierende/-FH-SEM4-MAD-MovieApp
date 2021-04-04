@@ -26,7 +26,7 @@
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/moviepicture" />
+            app:src="@{movie.img}" />
 
         <ScrollView
             android:id="@+id/scrollView2"
@@ -34,7 +34,7 @@
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView"
             app:layout_constraintVertical_bias="0.0">
@@ -46,10 +46,10 @@
                 <TextView
                     android:id="@+id/actor_name"
                     android:layout_width="0dp"
-                    android:layout_height="14dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
                     android:layout_marginLeft="12dp"
-                    android:layout_marginBottom="23dp"
+                    android:layout_marginBottom="20dp"
                     android:text="@{movie.actor}"
                     android:textColor="@color/white"
                     android:textSize="13dp"
@@ -59,23 +59,25 @@
                 <TextView
                     android:id="@+id/creator_label"
                     android:layout_width="55dp"
-                    android:layout_height="15dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginLeft="16dp"
+                    android:layout_marginTop="20dp"
                     android:layout_marginBottom="4dp"
                     android:text="@string/movie_creators"
                     android:textColor="@color/white"
                     android:textSize="13sp"
                     app:layout_constraintBottom_toTopOf="@+id/actor_label"
-                    app:layout_constraintStart_toStartOf="parent" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ratingBar" />
 
                 <TextView
                     android:id="@+id/creator_name"
                     android:layout_width="0dp"
-                    android:layout_height="14dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
                     android:layout_marginLeft="12dp"
-                    android:layout_marginBottom="6dp"
+                    android:layout_marginBottom="3dp"
                     android:text="@{movie.creator}"
                     android:textColor="@color/white"
                     android:textSize="13sp"
@@ -84,20 +86,19 @@
 
                 <TextView
                     android:id="@+id/genre_name"
-                    android:layout_width="88dp"
-                    android:layout_height="17dp"
-                    android:layout_marginStart="144dp"
-                    android:layout_marginLeft="144dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="44dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="203dp"
+                    android:layout_marginLeft="203dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginEnd="208dp"
+                    android:layout_marginRight="208dp"
                     android:text="@{movie.genre}"
                     android:textColor="@color/white"
                     android:textSize="13sp"
-                    app:layout_constraintBottom_toTopOf="@+id/creator_label"
-                    app:layout_constraintEnd_toStartOf="@+id/ratingBar"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/title_name"
-                    app:layout_constraintVertical_bias="0.0" />
+                    app:layout_constraintTop_toBottomOf="@+id/title_name" />
 
                 <TextView
                     android:id="@+id/title_name"
@@ -105,13 +106,14 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="144dp"
                     android:layout_marginLeft="144dp"
+                    android:layout_marginTop="4dp"
                     android:layout_marginEnd="144dp"
                     android:layout_marginRight="144dp"
                     android:text="@{movie.title}"
                     android:textColor="@color/white"
                     android:textSize="20dp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.465"
+                    app:layout_constraintHorizontal_bias="0.479"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -120,21 +122,23 @@
                     style="?android:attr/ratingBarStyleSmall"
                     android:layout_width="80dp"
                     android:layout_height="16dp"
-                    android:layout_marginTop="7dp"
-                    android:layout_marginEnd="140dp"
-                    android:layout_marginRight="140dp"
-                    android:layout_marginBottom="56dp"
-                    app:ratingValue="@{movie.rating}"
+                    android:layout_marginStart="167dp"
+                    android:layout_marginLeft="167dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="164dp"
+                    android:layout_marginRight="164dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/genre_name"
-                    app:layout_constraintTop_toBottomOf="@+id/title_name"
-                    app:layout_constraintVertical_bias="0.014" />
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/genre_name"
+                    app:layout_constraintVertical_bias="0.0"
+                    app:ratingValue="@{movie.rating}" />
 
                 <TextView
                     android:id="@+id/actor_label"
                     android:layout_width="55dp"
-                    android:layout_height="17dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="4dp"
@@ -173,6 +177,18 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floatButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="16dp"
+            android:clickable="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@android:drawable/ic_input_add" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

@@ -11,10 +11,10 @@
         android:label="HomeFragment" >
         <action
             android:id="@+id/home_to_detail_action"
-            app:destination="@id/detailFragment2" />
+            app:destination="@id/detailFragment" />
     </fragment>
     <fragment
-        android:id="@+id/detailFragment2"
+        android:id="@+id/detailFragment"
         android:name="com.example.movieapp.fragments.DetailFragment"
         android:label="DetailFragment" >
         <argument

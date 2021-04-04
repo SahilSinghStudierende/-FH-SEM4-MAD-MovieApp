@@ -1,7 +1,9 @@
 package com.example.movieapp.util
 
+import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
+import androidx.annotation.DrawableRes
 import androidx.databinding.BindingAdapter
 
 
@@ -14,6 +16,11 @@ fun setRatingValue(ratingBar: RatingBar, rating: Float) {
 @BindingAdapter("android:text")
 fun setText(textView: TextView, value: List<String>) {
     textView.text = value.joinToString(", ")
+}
+
+@BindingAdapter("src")
+fun setImageDrawable(view: ImageView, @DrawableRes drawableId: Int) {
+    view.setImageResource(drawableId);
 }
 
 // or this way:

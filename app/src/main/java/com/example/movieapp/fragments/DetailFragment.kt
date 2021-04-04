@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.example.movieapp.R
@@ -16,10 +17,23 @@ class DetailFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding = DataBindingUtil.inflate<FragmentDetailBinding>(inflater, R.layout.fragment_detail, container, false)
+        val binding = DataBindingUtil.inflate<FragmentDetailBinding>(
+            inflater,
+            R.layout.fragment_detail,
+            container,
+            false
+        )
 
         binding.movie = DetailFragmentArgs.fromBundle(requireArguments()).movie
 
+        // Floating Button
+        binding.floatButton.setOnClickListener {
+            Toast.makeText(
+                activity,
+                "Float Button clicked",
+                Toast.LENGTH_LONG
+            ).show()
+        }
 
         return binding.root
     }
