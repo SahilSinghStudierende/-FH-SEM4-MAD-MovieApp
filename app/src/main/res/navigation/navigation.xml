@@ -26,4 +26,17 @@
         android:name="com.example.movieapp.fragments.WatchListFragment"
         android:label="fragment_watch_list"
         tools:layout="@layout/fragment_watch_list" />
+    <fragment
+        android:id="@+id/quizFragmentNavigation"
+        android:name="com.example.movieapp.fragments.QuizFragment"
+        android:label="QuizFragment" >
+        <action
+            android:id="@+id/action_quizFragment_to_quizEndFragment"
+            app:destination="@id/quizEndFragment"
+            app:popUpTo="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/quizEndFragment"
+        android:name="com.example.movieapp.fragments.QuizEndFragment"
+        android:label="QuizEndFragment" />
 </navigation>
