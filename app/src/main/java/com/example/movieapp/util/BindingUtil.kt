@@ -20,7 +20,7 @@ fun setText(textView: TextView, value: List<String>) {
 
 @BindingAdapter("src")
 fun setImageDrawable(view: ImageView, @DrawableRes drawableId: Int) {
-    view.setImageResource(drawableId);
+    view.setImageResource(drawableId)
 }
 
 // or this way:

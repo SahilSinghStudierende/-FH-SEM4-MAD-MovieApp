@@ -7,19 +7,15 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.example.movieapp.R
 import com.example.movieapp.databinding.FragmentQuizBinding
-import com.example.movieapp.models.QuestionCatalogue
 import com.example.movieapp.models.QuizViewModel
 
 class QuizFragment : Fragment() {
     private lateinit var binding: FragmentQuizBinding
-    private val questions = QuestionCatalogue().defaultQuestions
-    private var score = 0;
-
-    private lateinit var model: QuizViewModel
+    private lateinit var viewModel: QuizViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,18 +24,16 @@ class QuizFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_quiz, container, false);
 
         // Get the viewmodel
-        model = ViewModelProviders.of(this).get(QuizViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(QuizViewModel::class.java)
 
-        model.currentQuiz.observe(viewLifecycleOwner, Observer { newQuiz ->
+        viewModel.currentQuiz.observe(viewLifecycleOwner, Observer { newQuiz ->
             binding.question = newQuiz
         })
-        model.index.observe(viewLifecycleOwner, Observer { newIndex ->
+        viewModel.index.observe(viewLifecycleOwner, Observer { newIndex ->
             binding.index = newIndex
         })
 
-        model.index.value = 0
-        model.currentQuiz.value = questions[model.index.value!!]
-        binding.questionsCount = questions.size
+        binding.questionsCount = viewModel.questions.value?.size
 
         binding.btnNext.setOnClickListener {
             nextQuestion()
@@ -49,30 +43,25 @@ class QuizFragment : Fragment() {
     }
 
     private fun nextQuestion(){
-        // get selected answer
-        // check if is correct answer
-        // update score
-        // check if there are any questions left
-        // show next question OR
-        // navigate to QuizEndFragment
 
         // Check for correct answer
         val answerId = binding.answerBox.checkedRadioButtonId;
         val actionButtonView: View = binding.answerBox.findViewById(answerId)
         val actionIndex = binding.answerBox.indexOfChild(actionButtonView);
 
-        if(questions[model.index.value!!].answers.elementAt(actionIndex).isCorrectAnswer)
-            score++
+        if(viewModel.questions.value!![viewModel.index.value!!].answers.elementAt(actionIndex).isCorrectAnswer)
+            viewModel.score.value = viewModel.score.value?.plus(1)
 
         binding.answerBox.clearCheck()
 
         // Check if questions left
-        if ((model.index.value!! + 1) > questions.size - 1) {
-            view?.findNavController()?.navigate(QuizFragmentDirections.actionQuizFragmentToQuizEndFragment(score, questions.count()))
+        if ((viewModel.index.value!! + 1) > viewModel.questions.value!!.size - 1) {
+            view?.findNavController()?.navigate(QuizFragmentDirections.actionQuizFragmentToQuizEndFragment(viewModel.score.value!!, viewModel.questions.value!!.count()))
             return;
         }
 
-        model.index.value = model.index.value?.plus(1)
-        model.currentQuiz.value = questions[model.index.value!!]
+        // Show the next Question if any questions left
+        viewModel.index.value = viewModel.index.value?.plus(1)
+        viewModel.currentQuiz.value = viewModel.questions.value!![viewModel.index.value!!]
     }
 }

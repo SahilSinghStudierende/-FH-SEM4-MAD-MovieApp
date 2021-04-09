@@ -31,7 +31,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
-            android:text="@{String.format(@string/question_progress, index, questionsCount)}"
+            android:text="@{String.format(@string/question_progress, index+1, questionsCount)}"
             android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

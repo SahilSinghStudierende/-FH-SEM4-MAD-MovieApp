@@ -1,6 +1,8 @@
 package com.example.movieapp
 
 import android.os.Bundle
+import android.os.PersistableBundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
@@ -29,4 +31,38 @@ class MainActivity : AppCompatActivity() {
         return NavigationUI.navigateUp(findNavController, drawLayout)
     }
 
+    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
+        super.onCreate(savedInstanceState, persistentState)
+        Log.i("MainActivity", "onCreate")
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Log.i("MainActivity", "onStart")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.i("MainActivity", "onPause")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.i("MainActivity", "onResume")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.i("MainActivity", "onDestroy")
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        Log.i("MainActivity", "onRestart")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.i("MainActivity", "onStop")
+    }
 }
