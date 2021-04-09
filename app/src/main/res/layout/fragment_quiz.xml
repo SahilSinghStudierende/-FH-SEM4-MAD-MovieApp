@@ -16,6 +16,10 @@
         <variable
             name="question"
             type="com.example.movieapp.models.Question" />
+
+        <variable
+            name="timer"
+            type="Long"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -102,6 +106,23 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="174dp"
+            android:layout_marginLeft="174dp"
+            android:layout_marginTop="36dp"
+            android:layout_marginEnd="179dp"
+            android:layout_marginRight="179dp"
+            android:layout_marginBottom="53dp"
+            app:setTime="@{timer}"
+            app:layout_constraintBottom_toTopOf="@+id/btnNext"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/answerBox" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
