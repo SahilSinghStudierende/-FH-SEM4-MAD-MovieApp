@@ -5,6 +5,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     >
+    <data>
+        <variable
+            name="scorenumber"
+            type="Integer" />
+        <variable
+            name="questionsCount"
+            type="Integer" />
+    </data>
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constaintLayout"
@@ -14,13 +23,13 @@
 
 
         <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/your_score_text"
             android:textColor="@color/white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:text="@string/your_score"
-            app:layout_constraintBottom_toTopOf="@+id/textView7"
+            app:layout_constraintBottom_toTopOf="@+id/score"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -28,16 +37,16 @@
             app:layout_constraintVertical_chainStyle="packed" />
 
         <TextView
-            android:id="@+id/textView7"
+            android:id="@+id/score"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:textColor="@color/white"
-            android:text="@string/default_score"
+            android:text="@{String.format(@string/default_score, scorenumber, questionsCount)}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView5" />
+            app:layout_constraintTop_toBottomOf="@+id/your_score_text" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

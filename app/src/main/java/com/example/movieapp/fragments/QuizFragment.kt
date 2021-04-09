@@ -6,15 +6,20 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.findNavController
 import com.example.movieapp.R
 import com.example.movieapp.databinding.FragmentQuizBinding
 import com.example.movieapp.models.QuestionCatalogue
+import com.example.movieapp.models.QuizViewModel
 
 class QuizFragment : Fragment() {
     private lateinit var binding: FragmentQuizBinding
     private val questions = QuestionCatalogue().defaultQuestions
     private var score = 0;
-    private var index = 0;
+
+    private lateinit var model: QuizViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -22,9 +27,19 @@ class QuizFragment : Fragment() {
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_quiz, container, false);
 
-        binding.index = index;
+        // Get the viewmodel
+        model = ViewModelProviders.of(this).get(QuizViewModel::class.java)
+
+        model.currentQuiz.observe(viewLifecycleOwner, Observer { newQuiz ->
+            binding.question = newQuiz
+        })
+        model.index.observe(viewLifecycleOwner, Observer { newIndex ->
+            binding.index = newIndex
+        })
+
+        model.index.value = 0
+        model.currentQuiz.value = questions[model.index.value!!]
         binding.questionsCount = questions.size
-        binding.question = questions[index]
 
         binding.btnNext.setOnClickListener {
             nextQuestion()
@@ -46,13 +61,18 @@ class QuizFragment : Fragment() {
         val actionButtonView: View = binding.answerBox.findViewById(answerId)
         val actionIndex = binding.answerBox.indexOfChild(actionButtonView);
 
-        if(questions[index].answers.elementAt(actionIndex).isCorrectAnswer)
+        if(questions[model.index.value!!].answers.elementAt(actionIndex).isCorrectAnswer)
             score++
 
+        binding.answerBox.clearCheck()
+
         // Check if questions left
-        if ((index + 1) > questions.count())
-            throw NotImplementedError()
+        if ((model.index.value!! + 1) > questions.size - 1) {
+            view?.findNavController()?.navigate(QuizFragmentDirections.actionQuizFragmentToQuizEndFragment(score, questions.count()))
+            return;
+        }
 
-
+        model.index.value = model.index.value?.plus(1)
+        model.currentQuiz.value = questions[model.index.value!!]
     }
 }

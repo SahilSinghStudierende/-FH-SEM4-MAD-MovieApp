@@ -21,8 +21,8 @@
     <string name="welcome_to_movieapp">Welcome to MovieApp!</string>
     <string name="next">Next</string>
     <string name="your_score">Your Score</string>
-    <string name="default_score">0/0</string>
     <string name="menu_quiz">Quiz</string>
 
+    <string name="default_score">%d/%d</string>
     <string name="question_progress">Question %d/%d</string>
 </resources>

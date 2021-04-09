@@ -38,5 +38,12 @@
     <fragment
         android:id="@+id/quizEndFragment"
         android:name="com.example.movieapp.fragments.QuizEndFragment"
-        android:label="QuizEndFragment" />
+        android:label="QuizEndFragment" >
+        <argument
+            android:name="quizScore"
+            app:argType="integer" />
+        <argument
+            android:name="quizCount"
+            app:argType="integer" />
+    </fragment>
 </navigation>
