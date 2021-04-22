@@ -76,7 +76,7 @@ class HomeFragment : Fragment() {
 
     private fun initializeMovieTwo(): Movie {
         return Movie(
-            title = "Snyder’s Justice League",
+            title = "Snyder’s Cut: Justice League Long title",
             rating = 4.5f,
             genre = listOf("Action", "Science-Fiction", "Fantasy", "Adventure"),
             actor = listOf("Ben Affleck", "Henry Cavill"),
