@@ -4,22 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
-            name="index"
-            type="Integer" />
-
-        <variable
-            name="questionsCount"
-            type="Integer" />
-
-        <variable
-            name="question"
-            type="com.example.movieapp.models.Question" />
-
-        <variable
-            name="timer"
-            type="Long"/>
+            name="quizViewModel"
+            type="com.example.movieapp.viewModel.QuizViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -35,7 +22,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
-            android:text="@{String.format(@string/question_progress, index+1, questionsCount)}"
+            android:text="@{String.format(@string/question_progress, quizViewModel.index +1, quizViewModel.questionCatalogue.size())}"
             android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -46,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
-            android:text="@{question.questionText}"
+            android:text="@{quizViewModel.currentQuiz.questionText}"
             android:gravity="center"
             android:textColor="@color/white"
             app:layout_constraintBottom_toTopOf="@+id/answerBox"
@@ -69,28 +56,28 @@
                 android:id="@+id/answer1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@{question.answers.get(0).answerText}"
+                android:text="@{quizViewModel.currentQuiz.answers.get(0).answerText}"
                 android:textColor="@color/white" />
 
             <RadioButton
                 android:id="@+id/answer2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@{question.answers.get(1).answerText}"
+                android:text="@{quizViewModel.currentQuiz.answers.get(1).answerText}"
                 android:textColor="@color/white" />
 
             <RadioButton
                 android:id="@+id/answer3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@{question.answers.get(2).answerText}"
+                android:text="@{quizViewModel.currentQuiz.answers.get(2).answerText}"
                 android:textColor="@color/white" />
 
             <RadioButton
                 android:id="@+id/answer4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@{question.answers.get(3).answerText}"
+                android:text="@{quizViewModel.currentQuiz.answers.get(3).answerText}"
                 android:textColor="@color/white" />
         </RadioGroup>
 
@@ -118,7 +105,7 @@
             android:layout_marginEnd="179dp"
             android:layout_marginRight="179dp"
             android:layout_marginBottom="53dp"
-            app:setTime="@{timer}"
+            android:text="@{quizViewModel.currentTimeString}"
             app:layout_constraintBottom_toTopOf="@+id/btnNext"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

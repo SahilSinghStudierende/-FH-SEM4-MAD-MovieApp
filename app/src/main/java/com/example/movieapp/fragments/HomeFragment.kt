@@ -102,5 +102,4 @@ class HomeFragment : Fragment() {
             img = R.drawable.endgame
         )
     }
-
 }
