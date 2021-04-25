@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import com.example.movieapp.R
 import com.example.movieapp.databinding.FragmentQuizEndBinding
 import com.example.movieapp.viewModel.QuizEndViewModel
@@ -34,6 +35,10 @@ class QuizEndFragment : Fragment() {
 
         binding.scorenumber = viewModel.finalScore
         binding.questionsCount = viewModel.questionCount
+
+        binding.quizRestartButton.setOnClickListener {
+            view?.findNavController()?.navigate(QuizEndFragmentDirections.actionQuizEndFragmentToQuizFragmentNavigation())
+        }
 
         return binding.root
     }

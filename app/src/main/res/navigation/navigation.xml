@@ -45,5 +45,9 @@
         <argument
             android:name="quizCount"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_quizEndFragment_to_quizFragmentNavigation"
+            app:destination="@id/quizFragmentNavigation"
+            app:popUpTo="@id/homeFragment" />
     </fragment>
 </navigation>

@@ -3,7 +3,10 @@ package com.example.movieapp.viewModel
 import android.os.CountDownTimer
 import android.text.format.DateUtils
 import android.util.Log
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
+import androidx.lifecycle.ViewModel
 import com.example.movieapp.models.Question
 import com.example.movieapp.models.QuestionCatalogue
 
@@ -32,7 +35,7 @@ class QuizViewModel : ViewModel() {
     val currentTime: LiveData<Long>
         get() = _currentTime
 
-    val currentTimeString = Transformations.map(currentTime) { time ->
+    val currentTimeString = Transformations.map(_currentTime) { time ->
         DateUtils.formatElapsedTime(time)
     }
 
@@ -51,11 +54,11 @@ class QuizViewModel : ViewModel() {
         _endGame.value = false
 
         initTimer(COUNTDOWN_TIME)
+        timer.start()
     }
 
     private fun initTimer(timeLeft: Long) {
-        Log.i("QuizViewModel", "ON INIT TIMER")
-
+        Log.i("QuizViewModel", "Initializing Timer")
         timer = object : CountDownTimer(
             timeLeft,
             ONE_SECOND
@@ -68,13 +71,7 @@ class QuizViewModel : ViewModel() {
             override fun onFinish() {
                 _endGame.value = true
             }
-
-            @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
-            fun something() {
-                Log.i("Something", "I am on stop!")
-            }
         }
-        timer.start()
     }
 
     fun stopTimer() {
@@ -86,6 +83,7 @@ class QuizViewModel : ViewModel() {
         if (currentTime.value == null || currentTime.value!! <= 0L)
             return;
         initTimer(currentTime.value!! * 1000)
+        timer.start()
         Log.i("QuizViewModel", "Resumed Timer! Time left ${currentTime.value!!}")
     }
 
