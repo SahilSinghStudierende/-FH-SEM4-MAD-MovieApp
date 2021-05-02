@@ -25,5 +25,10 @@
 
     <string name="default_score">%d/%d</string>
     <string name="question_progress">Question %d/%d</string>
+    <string name="my_notes">Your notes: %s</string>
     <string name="restart_quiz">Restart Quiz</string>
+    <string name="remove_favourite">Remove</string>
+    <string name="edit_favourite">Edit</string>
+    <string name="clear_favourite">Clear</string>
+    <string name="my_watchlist">My Watchlist</string>
 </resources>

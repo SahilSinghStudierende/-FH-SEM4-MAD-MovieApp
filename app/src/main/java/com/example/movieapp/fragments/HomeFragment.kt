@@ -23,8 +23,6 @@ class HomeFragment : Fragment() {
             container,
             false
         )
-
-
         // For Recycler View:
         val adapter = MovieOverviewAdapter()
         binding.movieList.adapter = adapter
@@ -41,12 +39,14 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
+    // Create the Options Menu at the top right - take the "navdrawmenu"
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
 
         inflater.inflate(R.menu.navdrawmenu, menu)
     }
 
+    // After selecting an Menu Item - navigate to the destination
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return NavigationUI.onNavDestinationSelected(
             item,

@@ -1,13 +1,12 @@
 package com.example.movieapp.fragments
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import androidx.navigation.ui.NavigationUI
 import com.example.movieapp.R
 import com.example.movieapp.databinding.FragmentQuizEndBinding
 import com.example.movieapp.viewModel.QuizEndViewModel
@@ -23,6 +22,8 @@ class QuizEndFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        setHasOptionsMenu(true)
+
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_quiz_end, container, false)
 
         viewModelFactory =
@@ -43,4 +44,12 @@ class QuizEndFragment : Fragment() {
         return binding.root
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater?.inflate(R.menu.navdrawmenu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return NavigationUI.onNavDestinationSelected(item, requireView().findNavController()) || super.onOptionsItemSelected(item)
+    }
 }

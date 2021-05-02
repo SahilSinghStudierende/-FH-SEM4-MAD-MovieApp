@@ -25,6 +25,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    // Will be called if Up Button will be pressed (Integrated Back Button in App)
     override fun onSupportNavigateUp(): Boolean {
         val findNavController = this.findNavController(R.id.navHost)
 

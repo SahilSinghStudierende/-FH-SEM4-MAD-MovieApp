@@ -6,8 +6,7 @@
     <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/draw_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+        android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -15,7 +14,7 @@
             android:background="@color/black"
             tools:context=".MainActivity">
 
-
+            <!-- defaultNavHost ensures that the NavHostFragment intercepts the system Back button. -->
             <fragment
                 android:id="@+id/navHost"
                 android:name="androidx.navigation.fragment.NavHostFragment"
@@ -26,13 +25,13 @@
                 tools:ignore="FragmentTagUsage" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
         <com.google.android.material.navigation.NavigationView
+            android:id="@+id/nav_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/nav_view"
             android:layout_gravity="start"
-            app:menu="@menu/navdrawmenu"
             app:headerLayout="@layout/nav_header_draw"
-            />
+            app:menu="@menu/navdrawmenu" />
     </androidx.drawerlayout.widget.DrawerLayout>
 </layout>
