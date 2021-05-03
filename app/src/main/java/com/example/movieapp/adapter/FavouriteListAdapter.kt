@@ -5,20 +5,20 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movieapp.R
+import com.example.movieapp.database.FavouriteMovieEntity
 import com.example.movieapp.databinding.FavoritesItemBinding
-import com.example.movieapp.models.Movie
 
 
 class FavoritesListAdapter(
-    private var dataSet: List<Movie>,
+    private var dataSet: List<FavouriteMovieEntity>,
     val onDeleteClicked: (Long) -> Unit,
-    val onEditClicked: (Movie) -> Unit
+    val onEditClicked: (FavouriteMovieEntity) -> Unit
 ): RecyclerView.Adapter<FavoritesListAdapter.ViewHolder>() {
 
     /**
      * If data set needs to be updated, call me!
      */
-    fun updateDataSet(movies: List<Movie>){
+    fun updateDataSet(movies: List<FavouriteMovieEntity>){
         dataSet = movies
         notifyDataSetChanged()
     }
@@ -43,7 +43,7 @@ class FavoritesListAdapter(
             }
         }
 
-        fun bind(movieItem: Movie) {
+        fun bind(movieItem: FavouriteMovieEntity) {
             with(binding) {
                 movie = movieItem
                 /**

@@ -8,8 +8,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.example.movieapp.R
 import com.example.movieapp.adapter.FavoritesListAdapter
+import com.example.movieapp.database.FavouriteMovieEntity
 import com.example.movieapp.databinding.FragmentWatchListBinding
-import com.example.movieapp.models.Movie
 
 class WatchListFragment : Fragment() {
 
@@ -35,7 +35,7 @@ class WatchListFragment : Fragment() {
     }
 
     // This is called when recyclerview item edit button is clicked
-    private fun onEditMovieClicked(movieObj: Movie){
+    private fun onEditMovieClicked(movieObj: FavouriteMovieEntity){
         // TODO implement me
     }
 
