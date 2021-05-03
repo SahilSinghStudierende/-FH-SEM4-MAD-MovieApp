@@ -2,7 +2,8 @@ package com.example.mad03_fragments_and_navigation.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.mad03_fragments_and_navigation.repositories.MovieRepository
+import com.example.movieapp.repositories.MovieRepository
+import com.example.movieapp.viewModel.MovieFavoritesViewModel
 
 @Suppress("UNCHECKED_CAST")
 class MovieFavoritesViewModelFactory(

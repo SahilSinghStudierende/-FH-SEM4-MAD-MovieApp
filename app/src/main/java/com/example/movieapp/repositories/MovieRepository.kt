@@ -1,6 +1,6 @@
 package com.example.movieapp.repositories
 
-import androidx.lifecycle.LiveData
+import android.util.Log
 import com.example.movieapp.database.FavouriteMovieEntity
 import com.example.movieapp.database.MovieDao
 import kotlinx.coroutines.Dispatchers
@@ -19,9 +19,9 @@ class MovieRepository(private val movieDao: MovieDao) {
             movieDao.updateFavouriteMovie(favouriteMovie)
         }
 
-    suspend fun deleteFavouriteMovie(movieId: Long) =
+    suspend fun deleteFavouriteMovie(movie: Long) =
         withContext(Dispatchers.IO) {
-            movieDao.deleteFavouriteMovie(movieId)
+            movieDao.deleteFavouriteMovie(movie)
         }
 
     suspend fun clearFavouriteMovies() =
@@ -29,10 +29,7 @@ class MovieRepository(private val movieDao: MovieDao) {
             movieDao.clearFavouriteMovies()
         }
 
-    suspend fun getAllFavouriteMovies(): LiveData<List<FavouriteMovieEntity>> =
-        withContext(Dispatchers.IO) {
-            return@withContext movieDao.getAllFavouriteMovies()
-        }
+    fun getAllFavouriteMovies() = movieDao.getAllFavouriteMovies()
 
     companion object {
         // For Singleton instantiation
@@ -41,6 +38,7 @@ class MovieRepository(private val movieDao: MovieDao) {
 
         fun getInstance(dao: MovieDao) =
             instance ?: synchronized(this) {
+                Log.i("MovieRepository", "Creating a new instance of MovieRepository...")
                 instance ?: MovieRepository(dao).also { instance = it }
             }
     }

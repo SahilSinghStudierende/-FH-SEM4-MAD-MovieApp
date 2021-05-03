@@ -1,12 +1,12 @@
 package com.example.movieapp.database
 
 import android.content.Context
+import android.util.Log
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.movieapp.models.Movie
 
-@Database(entities = [Movie::class], version = 1, exportSchema = false)
+@Database(entities = [FavouriteMovieEntity::class], version = 4, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract val movieDao: MovieDao
 
@@ -20,6 +20,7 @@ abstract class AppDatabase : RoomDatabase() {
                 var instance = INSTANCE
 
                 if (instance == null) {
+                    Log.i("AppDatabase", "Creating a new instance of AppDatabase")
                     instance = Room.databaseBuilder(
                         context.applicationContext,
                         AppDatabase::class.java,

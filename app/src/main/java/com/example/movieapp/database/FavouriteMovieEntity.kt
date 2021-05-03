@@ -6,10 +6,11 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "favourite_movies_table")
 data class FavouriteMovieEntity(
+    @ColumnInfo
+    var title: String? = "No title",
+    @ColumnInfo
+    var note: String = "No Notes"
+) {
     @PrimaryKey(autoGenerate = true)
-    val id: Long? = 0L,
-    @ColumnInfo
-    val title: String? = "No title",
-    @ColumnInfo
-    val note: String = "No Notes"
-)
+    var id: Long? = null
+}

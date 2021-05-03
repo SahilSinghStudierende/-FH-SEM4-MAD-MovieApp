@@ -1,5 +1,7 @@
 package com.example.movieapp.viewModel
 
+import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.movieapp.database.FavouriteMovieEntity
@@ -11,9 +13,16 @@ class MovieFavoritesViewModel (
     private val repository: MovieRepository
 ): ViewModel() {
 
+    val allFavouriteMovies: LiveData<List<FavouriteMovieEntity>> = repository.getAllFavouriteMovies()
+
+    init {
+
+    }
+
     fun insertFavouriteMovie(favouriteMovieEntity: FavouriteMovieEntity) {
         viewModelScope.launch {
             val id = repository.insertFavouriteMovie(favouriteMovieEntity)
+            Log.i("MovieFavouritesVM", "Added Favourite Movie ${favouriteMovieEntity.title} with the  ID $id")
         }
     }
 
@@ -23,21 +32,15 @@ class MovieFavoritesViewModel (
         }
     }
 
-    fun deleteFavouriteMovie(movieId: Long) {
+    fun deleteFavouriteMovie(movie: Long) {
         viewModelScope.launch {
-            repository.deleteFavouriteMovie(movieId)
+            repository.deleteFavouriteMovie(movie)
         }
     }
 
     fun clearFavourites() {
         viewModelScope.launch {
             repository.clearFavouriteMovies()
-        }
-    }
-
-    fun getAllFavouriteMovies() {
-        viewModelScope.launch {
-            repository.getAllFavouriteMovies()
         }
     }
 }
