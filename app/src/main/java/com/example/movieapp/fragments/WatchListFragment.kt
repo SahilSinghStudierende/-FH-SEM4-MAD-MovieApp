@@ -1,9 +1,15 @@
 package com.example.movieapp.fragments
 
+import android.app.AlertDialog
 import android.os.Bundle
+import android.text.InputType
+import android.util.Log
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
+import android.widget.LinearLayout
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -16,6 +22,7 @@ import com.example.movieapp.database.FavouriteMovieEntity
 import com.example.movieapp.databinding.FragmentWatchListBinding
 import com.example.movieapp.repositories.MovieRepository
 import com.example.movieapp.viewModel.MovieFavoritesViewModel
+
 
 class WatchListFragment : Fragment() {
 
@@ -30,11 +37,11 @@ class WatchListFragment : Fragment() {
 
         val adapter = FavoritesListAdapter(
             dataSet = listOf(),     // start with empty list
-            onDeleteClicked = {movieId -> onDeleteMovieClicked(movieId)},   // pass functions to adapter
-            onEditClicked = {movie -> onEditMovieClicked(movie)}           // pass functions to adapter
+            onDeleteClicked = { movieId -> onDeleteMovieClicked(movieId) },   // pass functions to adapter
+            onEditClicked = { movie -> onEditMovieClicked(movie) }           // pass functions to adapter
         )
 
-        with(binding){
+        with(binding) {
             recyclerView.adapter = adapter
         }
 
@@ -58,13 +65,45 @@ class WatchListFragment : Fragment() {
         return binding.root
     }
 
-    // This is called when recyclerview item edit button is clicked
-    private fun onEditMovieClicked(movieObj: FavouriteMovieEntity){
-        // TODO implement me
+    // This is called when RecyclerView item edit button is clicked
+    private fun onEditMovieClicked(movieObj: FavouriteMovieEntity) {
+        val builder: AlertDialog.Builder =
+            AlertDialog.Builder(requireNotNull(this.activity), R.style.AlertDialogStyle)
+        builder.setTitle("Edit Note")
+
+        // Layout for the EditText Input Field
+        val layout = LinearLayout(requireNotNull(this.activity))
+        layout.orientation = LinearLayout.VERTICAL
+        layout.gravity = Gravity.CENTER_HORIZONTAL
+        layout.setPadding(50, 0, 50, 0)
+
+        // Input Field Customized
+        val input = EditText(requireNotNull(this.activity))
+        input.inputType = InputType.TYPE_CLASS_TEXT
+        input.setTextColor(resources.getColor(R.color.white))
+        input.setText(movieObj.note)
+        input.setSelection(input.text.toString().length)
+
+        // Add it to the Alert
+        layout.addView(input)
+        builder.setView(layout)
+
+        // Setup update and cancel buttons
+        builder.setPositiveButton("Update") { _, _ ->
+            movieObj.note = input.text.toString()
+            favouriteMovieViewModel.updateFavouriteMovie(movieObj)
+            Log.i("WatchListFragment", "I got it! ${movieObj.note}")
+        }
+
+        builder.setNegativeButton("Cancel") { dialog, _ ->
+            dialog.cancel()
+        }
+
+        builder.show()
     }
 
     // This is called when recyclerview item remove button is clicked
-    private fun onDeleteMovieClicked(movieId: Long){
+    private fun onDeleteMovieClicked(movieId: Long) {
         favouriteMovieViewModel.deleteFavouriteMovie(movieId)
     }
 }
