@@ -3,7 +3,6 @@ package com.example.movieapp.fragments
 import android.app.AlertDialog
 import android.os.Bundle
 import android.text.InputType
-import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -54,9 +53,10 @@ class WatchListFragment : Fragment() {
         favouriteMovieViewModel =
             ViewModelProvider(this, viewModelFactory).get(MovieFavoritesViewModel::class.java)
 
+        // Setup the Bindings and Observables
         favouriteMovieViewModel.allFavouriteMovies.observe(viewLifecycleOwner, Observer {
             adapter.updateDataSet(it)
-        });
+        })
 
         binding.clearBtn.setOnClickListener {
             favouriteMovieViewModel.clearFavourites()
@@ -67,6 +67,7 @@ class WatchListFragment : Fragment() {
 
     // This is called when RecyclerView item edit button is clicked
     private fun onEditMovieClicked(movieObj: FavouriteMovieEntity) {
+        // Build an Alert Dialog where the user is able to edit the note via Dialog
         val builder: AlertDialog.Builder =
             AlertDialog.Builder(requireNotNull(this.activity), R.style.AlertDialogStyle)
         builder.setTitle("Edit Note")
@@ -92,7 +93,6 @@ class WatchListFragment : Fragment() {
         builder.setPositiveButton("Update") { _, _ ->
             movieObj.note = input.text.toString()
             favouriteMovieViewModel.updateFavouriteMovie(movieObj)
-            Log.i("WatchListFragment", "I got it! ${movieObj.note}")
         }
 
         builder.setNegativeButton("Cancel") { dialog, _ ->

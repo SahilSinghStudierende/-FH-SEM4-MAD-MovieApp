@@ -44,7 +44,12 @@ class DetailFragment : Fragment() {
 
         // Floating Button
         binding.floatButton.setOnClickListener {
-            favouriteMovieViewModel.insertFavouriteMovie(FavouriteMovieEntity(movie.title, movie.note))
+                favouriteMovieViewModel.insertFavouriteMovie(
+                    FavouriteMovieEntity(
+                        movie.title,
+                        ""
+                    ), applicationContext
+                )
         }
 
         return binding.root

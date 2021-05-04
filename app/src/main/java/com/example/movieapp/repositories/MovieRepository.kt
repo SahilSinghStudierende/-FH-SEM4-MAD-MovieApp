@@ -1,5 +1,6 @@
 package com.example.movieapp.repositories
 
+import android.database.sqlite.SQLiteException
 import android.util.Log
 import com.example.movieapp.database.FavouriteMovieEntity
 import com.example.movieapp.database.MovieDao
@@ -11,7 +12,12 @@ class MovieRepository(private val movieDao: MovieDao) {
 
     suspend fun insertFavouriteMovie(favouriteMovie: FavouriteMovieEntity): Long =
         withContext(Dispatchers.IO) {
-            return@withContext movieDao.insertFavouriteMovie(favouriteMovie)
+            try {
+                return@withContext movieDao.insertFavouriteMovie(favouriteMovie)
+            } catch(e: SQLiteException) {
+                Log.e("MovieRepository", "Could not Insert ${favouriteMovie.title} - returning ID -1")
+                return@withContext -1L
+            }
         }
 
     suspend fun updateFavouriteMovie(favouriteMovie: FavouriteMovieEntity) =

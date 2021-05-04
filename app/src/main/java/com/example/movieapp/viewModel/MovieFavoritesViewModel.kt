@@ -1,28 +1,44 @@
 package com.example.movieapp.viewModel
 
+import android.content.Context
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.movieapp.database.FavouriteMovieEntity
 import com.example.movieapp.repositories.MovieRepository
-import kotlinx.coroutines.launch
 
 
-class MovieFavoritesViewModel (
+class MovieFavoritesViewModel(
     private val repository: MovieRepository
-): ViewModel() {
+) : ViewModel() {
 
-    val allFavouriteMovies: LiveData<List<FavouriteMovieEntity>> = repository.getAllFavouriteMovies()
+    val allFavouriteMovies: LiveData<List<FavouriteMovieEntity>> =
+        repository.getAllFavouriteMovies()
 
-    init {
-
-    }
-
-    fun insertFavouriteMovie(favouriteMovieEntity: FavouriteMovieEntity) {
+    fun insertFavouriteMovie(favouriteMovieEntity: FavouriteMovieEntity, context: Context) {
         viewModelScope.launch {
             val id = repository.insertFavouriteMovie(favouriteMovieEntity)
-            Log.i("MovieFavouritesVM", "Added Favourite Movie ${favouriteMovieEntity.title} with the  ID $id")
+            if (id == -1L) {
+                Toast.makeText(
+                    context,
+                    "Movie already added to the favourite!",
+                    Toast.LENGTH_SHORT
+                ).show()
+                return@launch
+            }
+
+            Toast.makeText(
+                context,
+                "Movie got added to the Watchlist!",
+                Toast.LENGTH_SHORT
+            ).show()
+
+            Log.i(
+                "MovieFavouritesVM",
+                "Added Favourite Movie ${favouriteMovieEntity.title} with the  ID $id"
+            )
         }
     }
 

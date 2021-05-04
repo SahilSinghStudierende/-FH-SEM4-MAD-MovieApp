@@ -1,15 +1,14 @@
 package com.example.movieapp.database
 
+import android.database.sqlite.SQLiteException
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Update
+import androidx.room.*
 
 @Dao
 interface MovieDao {
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.ABORT)
+    @Throws(SQLiteException::class)
     fun insertFavouriteMovie(movie: FavouriteMovieEntity): Long
 
     @Update
